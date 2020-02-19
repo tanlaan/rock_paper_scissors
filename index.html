@@ -6,7 +6,54 @@
 
     <body>
     <script>
+        function computerPlay(){
+            const choice = getRandomInt(3);
+            switch (choice) {
+                case 0:
+                    return 'rock';
+                    break;
+                case 1:
+                    return 'paper';
+                    break;
+                case 2:
+                    return 'scissors';
+                    break;
+                default:
+                    return 'error';
+            }
+        }
+
+        function playerSelection(){
+            let choice;
+            while (true){
+                choice = prompt('Rock, Paper, or Scissors?');
+                switch (choice.toLowerCase()){
+                    case 'rock':
+                        return 'rock';
+                        break;
+                    case 'paper':
+                        return 'paper';
+                        break;
+                    case 'scissors':
+                        return 'scissors';
+                        break;
+                    default:
+                        alert('Incorrect, it needs to be rock, paper, or scissors');
+                }
+            }
+        }
         
+        function playRound(playerSelection, computerPlay){
+        }
+
+        function game(){
+        }
+
+
+        function getRandomInt(max){
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+
     </script>
     </body>
 </html>
