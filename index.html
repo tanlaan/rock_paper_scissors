@@ -43,10 +43,54 @@
             }
         }
         
-        function playRound(playerSelection, computerPlay){
+        function playRound(){
+            const playerChoice = playerSelection();
+            const computerChoice = computerPlay();
+            if (playerChoice == computerChoice) return 'tie';
+            console.log(outcome(playerChoice, computerChoice));
+            return outcome(playerChoice, computerChoice);
+        }
+
+        function outcome(player, computer){
+            switch (player){
+                case 'rock':
+                    return (computer == 'paper') ? 'loss':'win';
+                    break;
+                case 'paper':
+                    return (computer == 'scissors') ? 'loss':'win';
+                    break;
+                case 'scissors':
+                    return (computer == 'rock') ? 'loss':'win';
+                defualt:
+                    return;
+            }
         }
 
         function game(){
+            let i;
+            let playerScore = 0;
+            let computerScore = 0;
+            for (i = 0; i < 5; i++){
+                let winState = playRound();
+                switch (winState){
+                    case 'win':
+                        playerScore++;
+                        break;
+                    case 'loss':
+                        computerScore++;
+                        break;
+                    case 'tie':
+                        break;
+                    default:
+                        return;
+                }
+            }
+            if (playerScore == computerScore) {
+                console.log('tie');
+                return 'tie';
+            }
+            console.log((playerScore > computerScore) ? 'win':'loss');
+            return (playerScore > computerScore) ? 'win': 'loss';
         }
 
 
