@@ -9,12 +9,10 @@ buttons.forEach(button => {
 // Prior Code
 
 function playRound(e){
-    console.log(e.target.textContent.toLowerCase());
     const playerChoice = e.target.textContent.toLowerCase();
     const computerChoice = computerPlay();
-    console.log(outcome(playerChoice, computerChoice));
-    changeState(outcome(playerChoice, computerChoice));
-}
+    changeState(playerChoice, computerChoice);
+};
 
 function computerPlay(){
     const choice = getRandomInt(3);
@@ -30,8 +28,8 @@ function computerPlay(){
             break;
         default:
             return 'error';
-    }
-}
+    };
+};
 
 function outcome(player, computer){
     if (player == computer) return 'tie';
@@ -46,16 +44,36 @@ function outcome(player, computer){
             return (computer == 'rock') ? 'loss':'win';
         defualt:
             return;
+    };
+};
+
+function changeState (player, computer) {
+    const status = document.querySelector('#status p');
+    const message = document.querySelector('#message h2');
+    const state = outcome(player, computer);
+    switch(state){
+        case 'win':
+            status.textContent = `${player} beats ${computer}.`
+            message.textContent = "YOU WIN!"
+            break;
+        case 'loss':
+            status.textContent = `${player} loses to ${computer}.`
+            message.textContent = "YOU LOSE!"
+            break;
+        case 'tie':
+            status.textContent = `${player} ties with ${computer}.`
+            message.textContent = "We have a tie!"
+            break;
+        default:
+            return;
     }
-}
 
-function changeState (state) {
-
-}
+    message.textContent
+};
 
 function getRandomInt(max){
     return Math.floor(Math.random() * Math.floor(max));
-}
+};
 
 /*
 function playerSelection(){
