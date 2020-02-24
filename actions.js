@@ -1,5 +1,9 @@
 // Rock Paper Scissors
 
+let playerScore = 0;
+let computerScore = 0;
+
+
 const buttons = document.querySelectorAll('button');
 buttons.forEach(button => {
     button.addEventListener('click', playRound);
@@ -11,6 +15,11 @@ buttons.forEach(button => {
 function playRound(e){
     const playerChoice = e.target.textContent.toLowerCase();
     const computerChoice = computerPlay();
+    if (playerScore >=5 || computerScore >=5 ) {
+        playerScore = 0;
+        computerScore = 0;
+        document.querySelector('#message h2').textContent = "";
+    }
     changeState(playerChoice, computerChoice);
 };
 
@@ -50,25 +59,30 @@ function outcome(player, computer){
 function changeState (player, computer) {
     const status = document.querySelector('#status p');
     const message = document.querySelector('#message h2');
+    const score = document.querySelector('#score p')
     const state = outcome(player, computer);
     switch(state){
         case 'win':
             status.textContent = `${player} beats ${computer}.`
-            message.textContent = "YOU WIN!"
+            playerScore++;
             break;
         case 'loss':
             status.textContent = `${player} loses to ${computer}.`
-            message.textContent = "YOU LOSE!"
+            computerScore++;
             break;
         case 'tie':
             status.textContent = `${player} ties with ${computer}.`
-            message.textContent = "We have a tie!"
             break;
         default:
             return;
     }
 
-    message.textContent
+    score.textContent = `You: ${playerScore}:${computerScore} :Computer`;
+
+    if (playerScore >= 5 || computerScore >= 5) {
+        if (playerScore >= 5) message.textContent = "YOU WIN!";
+        if (computerScore >= 5) message.textContent = "YOU LOSE!"
+    }
 };
 
 function getRandomInt(max){
